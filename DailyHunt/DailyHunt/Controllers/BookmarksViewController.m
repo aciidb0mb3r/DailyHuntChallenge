@@ -7,8 +7,16 @@
 //
 
 #import "BookmarksViewController.h"
+#import "NewsTableViewCell.h"
+#import "NewsArticle.h"
+#import "ReadNewsViewController.h"
+#import "BookmarksManager.h"
+#import <UIImageView+WebCache.h>
 
 @interface BookmarksViewController ()
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray<NewsArticle *> *articles;
 
 @end
 
@@ -16,22 +24,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    self.articles = [[BookmarksManager sharedInstance] bookmarkedArticles];
+    [self.tableView reloadData];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UITableViewDataSource
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.articles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"NewsTableViewCell";
+    
+    NewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    NewsArticle *article = self.articles[indexPath.row];
+    
+    cell.newsTitle.text = article.title;
+    [cell.newsImageView sd_setImageWithURL:article.imageURL placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showNewsFromBookMarks" sender:self];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 48.0;
+}
+
+#pragma mark - Prepare for Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"showNewsFromBookMarks"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NewsArticle *article = [self.articles objectAtIndex:indexPath.row];
+        ReadNewsViewController *vc = segue.destinationViewController;
+        vc.newsArticle = article;
+    }
 }
-*/
 
 @end

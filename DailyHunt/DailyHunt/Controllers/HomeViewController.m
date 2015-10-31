@@ -58,7 +58,7 @@
     [self.bookmarksButton setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
     [self.bookmarksButton addTarget:self action:@selector(openBookmarks:) forControlEvents:UIControlEventTouchUpInside];
     [self.bookmarksButton sizeToFit];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.bookmarksButton];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.bookmarksButton];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
