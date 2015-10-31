@@ -14,6 +14,7 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
+@property (nonatomic, strong) UIButton *bookmarksButton;
 @property (nonatomic, strong) UIButton *navbarTitleViewButton;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -32,6 +33,11 @@
     [self setupPullToRefresh];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setupNavBar];
+}
+
 - (void)setupNavBar {
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:17/255.0 green:34/255.0 blue:51/255.0 alpha:1.0];
     self.navigationController.navigationBar.translucent = NO;
@@ -45,6 +51,12 @@
     self.navbarTitleViewButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     self.navbarTitleViewButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     self.navbarTitleViewButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    
+    self.bookmarksButton = [[UIButton alloc] init];
+    [self.bookmarksButton setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
+    [self.bookmarksButton addTarget:self action:@selector(openBookmarks:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bookmarksButton sizeToFit];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.bookmarksButton];
 }
 
 - (void)searchSetup {
@@ -124,6 +136,10 @@
 - (void)updateTitleLabelWithString:(NSString *)string {
     [self.navbarTitleViewButton setTitle:string forState:UIControlStateNormal];
     [self.navbarTitleViewButton sizeToFit];
+}
+
+- (void)openBookmarks:(id)sender {
+    [self performSegueWithIdentifier:@"openBookmarks" sender:self];
 }
 
 #pragma mark - UISearchBarDelegate
