@@ -22,34 +22,56 @@
 }
 
 - (NewsArticleCategory)category {
-    NewsArticleCategory category = NewsArticleCategoryUnknown;
+    return [NewsArticle categoryForCategoryString:self.categoryString];
+}
+
++ (NSString *)categoryStringForCategory:(NewsArticleCategory)category {
+    NSDictionary *enumToStringDict = [NewsArticle categoryDictEnumToString];
     
-    if([self.categoryString isEqualToString:@"World"]) {
-        category = NewsArticleCategoryWorld;
-        
-    } else if([self.categoryString isEqualToString:@"Education"]) {
-        category = NewsArticleCategoryEducation;
-        
-    } else if([self.categoryString isEqualToString:@"Science"]) {
-        category = NewsArticleCategoryScience;
-        
-    } else if([self.categoryString isEqualToString:@"Technology"]) {
-        category = NewsArticleCategoryTechnology;
-        
-    } else if([self.categoryString isEqualToString:@"Food"]) {
-        category = NewsArticleCategoryFood;
-        
-    } else if([self.categoryString isEqualToString:@"Sports"]) {
-        category = NewsArticleCategorySports;
-        
+    if([enumToStringDict.allKeys containsObject:@(category)]) {
+        return [enumToStringDict objectForKey:@(category)];
     }
+    return nil;
+}
++ (NewsArticleCategory)categoryForCategoryString:(NSString *)categoryString {
     
-    return category;
+    NSDictionary *stringToEnumDict = [NewsArticle categoryDictStringToEnum];
+    
+    if([stringToEnumDict.allKeys containsObject:categoryString]) {
+        return [[stringToEnumDict objectForKey:categoryString] integerValue];
+    }
+    return NewsArticleCategoryUnknown;
+}
+
++ (NSArray<NSString *> *)allCategories {
+    return [NewsArticle categoryDictStringToEnum].allKeys;
+}
+
++ (NSDictionary<NSString *, NSNumber *> *)categoryDictEnumToString {
+    return  @{
+              @(NewsArticleCategoryWorld)      :   @"World",
+              @(NewsArticleCategoryEducation)  :   @"Education",
+              @(NewsArticleCategoryScience)    :   @"Science",
+              @(NewsArticleCategoryTechnology) :   @"Technology",
+              @(NewsArticleCategoryFood)       :   @"Food",
+              @(NewsArticleCategorySports)     :   @"Sports",
+              };
+}
+
++ (NSDictionary<NSString *, NSNumber *> *)categoryDictStringToEnum {
+    return  @{
+               @"World"         :   @(NewsArticleCategoryWorld) ,
+               @"Education"     :   @(NewsArticleCategoryEducation),
+               @"Science"       :   @(NewsArticleCategoryScience),
+               @"Technology"    :   @(NewsArticleCategoryTechnology),
+               @"Food"          :   @(NewsArticleCategoryFood) ,
+               @"Sports"        :   @(NewsArticleCategorySports)
+               };
 }
 
 + (NSArray<NewsArticle *> *)newsArticleForCategory:(NewsArticleCategory)category inArray:(NSArray<NewsArticle *> *)inputArray {
     
-    NSMutableArray<NewsArticle *> *outputArray = [@{} mutableCopy];
+    NSMutableArray<NewsArticle *> *outputArray = [@[] mutableCopy];
     
     for(NewsArticle *article in inputArray) {
         if(article.category == category) {

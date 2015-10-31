@@ -14,7 +14,8 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
-@property (strong, nonatomic) UISearchController *searchController;
+@property (nonatomic, strong) UIButton *navbarTitleViewButton;
+@property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray<NewsArticle *> *articles;
 @property (nonatomic, strong) NSArray<NewsArticle *> *fetchedArticles;
@@ -34,6 +35,11 @@
 - (void)setupNavBar {
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:17/255.0 green:34/255.0 blue:51/255.0 alpha:1.0];
     self.navigationController.navigationBar.translucent = NO;
+    
+    self.navbarTitleViewButton = [[UIButton alloc] init];
+    [self.navbarTitleViewButton setTitle:@"Home" forState:UIControlStateNormal];
+    [self.navbarTitleViewButton addTarget:self action:@selector(titleViewClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = self.navbarTitleViewButton;
 }
 
 - (void)searchSetup {
@@ -79,7 +85,46 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)titleViewClicked:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"DailyHunt" message:@"Choose a Category" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:cancelAction];
+    
+    for (NSString *category in NewsArticle.allCategories) {
+        
+        NewsArticleCategory articleCategory = [NewsArticle categoryForCategoryString:category];
+        NSArray<NewsArticle *> *categoryResults = [NewsArticle newsArticleForCategory:articleCategory inArray:self.fetchedArticles];
+        NSString *actionTitle = [NSString stringWithFormat:@"%@ (%ld)", category, categoryResults.count];
+        UIAlertAction *categoryAction = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self updateTitleLabelWithString:actionTitle];
+            self.articles = categoryResults;
+            [self.tableView reloadData];
+        }];
+        [alertController addAction:categoryAction];
+    }
+    
+    UIAlertAction *homeAction = [UIAlertAction actionWithTitle:@"All Categories" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self updateTitleLabelWithString:@"Home"];
+        self.articles = self.fetchedArticles;
+        [self.tableView reloadData];
+    }];
+
+    [alertController addAction:homeAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)updateTitleLabelWithString:(NSString *)string {
+    [self.navbarTitleViewButton setTitle:string forState:UIControlStateNormal];
+    [self.navbarTitleViewButton sizeToFit];
+}
+
 #pragma mark - UISearchBarDelegate
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [self updateTitleLabelWithString:@"Home"];
+    return YES;
+}
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.articles = self.fetchedArticles;

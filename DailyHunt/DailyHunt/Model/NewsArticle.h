@@ -29,5 +29,7 @@ typedef NS_ENUM(NSUInteger, NewsArticleCategory) {
 @property (nonatomic, copy, readonly) NSURL *newsURL;
 
 + (NSArray<NewsArticle *> *)newsArticleForCategory:(NewsArticleCategory)category inArray:(NSArray<NewsArticle *> *)inputArray;
++ (NSArray<NSString *> *)allCategories;
++ (NewsArticleCategory)categoryForCategoryString:(NSString *)categoryString;
 
 @end
