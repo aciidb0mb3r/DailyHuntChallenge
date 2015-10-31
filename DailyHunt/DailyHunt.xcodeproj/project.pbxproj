@@ -23,6 +23,7 @@
 		544565B91BE4B5C500E543B7 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 544565B81BE4B5C500E543B7 /* Utilities.m */; settings = {ASSET_TAGS = (); }; };
 		544565BC1BE4B5DF00E543B7 /* NewsFeedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 544565BB1BE4B5DF00E543B7 /* NewsFeedManager.m */; settings = {ASSET_TAGS = (); }; };
 		544565BE1BE4BB4E00E543B7 /* placeholder@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 544565BD1BE4BB4E00E543B7 /* placeholder@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		544CF83A1BE4D98600E562BF /* BookmarksManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 544CF8391BE4D98600E562BF /* BookmarksManager.m */; settings = {ASSET_TAGS = (); }; };
 		5453B2AD1BE4B038004B4CCF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5453B2AC1BE4B038004B4CCF /* main.m */; };
 		5453B2B01BE4B038004B4CCF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5453B2AF1BE4B038004B4CCF /* AppDelegate.m */; };
 		5453B2B61BE4B038004B4CCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5453B2B41BE4B038004B4CCF /* Main.storyboard */; };
@@ -55,6 +56,8 @@
 		544565BA1BE4B5DF00E543B7 /* NewsFeedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsFeedManager.h; sourceTree = "<group>"; };
 		544565BB1BE4B5DF00E543B7 /* NewsFeedManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedManager.m; sourceTree = "<group>"; };
 		544565BD1BE4BB4E00E543B7 /* placeholder@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder@2x.jpg"; sourceTree = "<group>"; };
+		544CF8381BE4D98600E562BF /* BookmarksManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksManager.h; sourceTree = "<group>"; };
+		544CF8391BE4D98600E562BF /* BookmarksManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksManager.m; sourceTree = "<group>"; };
 		5453B2A81BE4B038004B4CCF /* DailyHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5453B2AC1BE4B038004B4CCF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5453B2AE1BE4B038004B4CCF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -98,6 +101,8 @@
 				544565BB1BE4B5DF00E543B7 /* NewsFeedManager.m */,
 				544565A01BE4B44400E543B7 /* NewsArticle.h */,
 				544565A11BE4B44400E543B7 /* NewsArticle.m */,
+				544CF8381BE4D98600E562BF /* BookmarksManager.h */,
+				544CF8391BE4D98600E562BF /* BookmarksManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				544565991BE4B40000E543B7 /* HomeViewController.m in Sources */,
 				5445659C1BE4B41800E543B7 /* ReadNewsViewController.m in Sources */,
 				544565A51BE4B46900E543B7 /* NewsTableViewCell.m in Sources */,
+				544CF83A1BE4D98600E562BF /* BookmarksManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

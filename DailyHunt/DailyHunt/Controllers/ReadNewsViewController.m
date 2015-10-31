@@ -7,6 +7,7 @@
 //
 
 #import "ReadNewsViewController.h"
+#import "BookmarksManager.h"
 
 @interface ReadNewsViewController ()
 
@@ -16,22 +17,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self setupNavBar];
+}
+- (void)setupNavBar {
+    
+    UIButton *bookmarksButton = [[UIButton alloc] init];
+    [bookmarksButton setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
+    [bookmarksButton addTarget:self action:@selector(addToBookmarks:) forControlEvents:UIControlEventTouchUpInside];
+    [bookmarksButton sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:bookmarksButton];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)addToBookmarks:(id)sender {
+    BookmarksManager *bookmarksManager = [BookmarksManager sharedInstance];
+    [bookmarksManager addToBookmark:self.newsArticle];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
