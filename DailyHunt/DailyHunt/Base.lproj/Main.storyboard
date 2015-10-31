@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -135,9 +136,87 @@
                     <view key="view" contentMode="scaleToFill" id="MVP-bM-k41">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nx2-Zi-JGy">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qyg-ZT-OaU" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="507.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What former India coach Gary Kirsten had to say on MS Dhoni's retirement calls" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEL-mg-jT8">
+                                                <rect key="frame" x="16" y="16" width="512" height="48"/>
+                                                <animations/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFi-fi-8mV">
+                                                <rect key="frame" x="555" y="17" width="45" height="45"/>
+                                                <animations/>
+                                                <state key="normal" image="share_icon.png"/>
+                                                <connections>
+                                                    <action selector="shareButtonPressed:" destination="xIT-7i-Qdy" eventType="touchUpInside" id="4JS-5e-Kpu"/>
+                                                </connections>
+                                            </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4WQ-f5-1PT">
+                                                <rect key="frame" x="0.0" y="80" width="600" height="374.5"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="4WQ-f5-1PT" secondAttribute="height" multiplier="125:78" id="w9A-yM-zqO"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDz-r6-HLZ">
+                                                <rect key="frame" x="16" y="471" width="42" height="20.5"/>
+                                                <animations/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.090196078430000007" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="4WQ-f5-1PT" secondAttribute="trailing" id="3oq-zj-iz9"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GDz-r6-HLZ" secondAttribute="trailing" constant="16" id="7Zh-vh-ibb"/>
+                                            <constraint firstItem="4WQ-f5-1PT" firstAttribute="top" secondItem="NEL-mg-jT8" secondAttribute="bottom" constant="16" id="KU4-iw-tO3"/>
+                                            <constraint firstItem="NEL-mg-jT8" firstAttribute="leading" secondItem="Qyg-ZT-OaU" secondAttribute="leading" constant="16" id="LwM-e0-NMC"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NEL-mg-jT8" secondAttribute="trailing" constant="32" id="Lze-uG-spG"/>
+                                            <constraint firstItem="4WQ-f5-1PT" firstAttribute="leading" secondItem="Qyg-ZT-OaU" secondAttribute="leading" id="N13-qU-myx"/>
+                                            <constraint firstItem="GDz-r6-HLZ" firstAttribute="top" secondItem="4WQ-f5-1PT" secondAttribute="bottom" constant="16" id="PvE-Fv-ibm"/>
+                                            <constraint firstAttribute="trailing" secondItem="gFi-fi-8mV" secondAttribute="trailing" id="Qvz-4V-olj"/>
+                                            <constraint firstItem="NEL-mg-jT8" firstAttribute="top" secondItem="Qyg-ZT-OaU" secondAttribute="top" constant="16" id="TZ6-lW-BYp"/>
+                                            <constraint firstAttribute="bottom" secondItem="GDz-r6-HLZ" secondAttribute="bottom" constant="16" id="eUZ-6N-tJE"/>
+                                            <constraint firstItem="gFi-fi-8mV" firstAttribute="centerY" secondItem="NEL-mg-jT8" secondAttribute="centerY" id="m8m-va-Z6v"/>
+                                            <constraint firstItem="GDz-r6-HLZ" firstAttribute="leading" secondItem="Qyg-ZT-OaU" secondAttribute="leading" constant="16" id="qsg-PK-1eu"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Qyg-ZT-OaU" secondAttribute="bottom" id="DMR-ct-N0k"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qyg-ZT-OaU" secondAttribute="trailing" id="jKl-il-ryk"/>
+                                    <constraint firstItem="Qyg-ZT-OaU" firstAttribute="top" secondItem="nx2-Zi-JGy" secondAttribute="top" id="xIY-rq-ZDd"/>
+                                    <constraint firstItem="Qyg-ZT-OaU" firstAttribute="leading" secondItem="nx2-Zi-JGy" secondAttribute="leading" id="xuE-ht-T4h"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.090196078430000007" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nx2-Zi-JGy" secondAttribute="trailing" id="9h3-h2-qXp"/>
+                            <constraint firstItem="Bth-Vf-gkz" firstAttribute="top" secondItem="nx2-Zi-JGy" secondAttribute="bottom" id="C5w-O6-Hhu"/>
+                            <constraint firstItem="nx2-Zi-JGy" firstAttribute="leading" secondItem="MVP-bM-k41" secondAttribute="leading" id="IBM-mC-20U"/>
+                            <constraint firstItem="Qyg-ZT-OaU" firstAttribute="width" secondItem="MVP-bM-k41" secondAttribute="width" id="RGy-eE-uz4"/>
+                            <constraint firstItem="nx2-Zi-JGy" firstAttribute="top" secondItem="q12-ut-yHB" secondAttribute="bottom" id="nrO-MR-FlU"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="newsContentLabel" destination="GDz-r6-HLZ" id="MNg-AS-OeG"/>
+                        <outlet property="newsImageView" destination="4WQ-f5-1PT" id="bPc-pd-DK6"/>
+                        <outlet property="newsTitleLabel" destination="NEL-mg-jT8" id="pDW-gw-god"/>
+                        <outlet property="shareButton" destination="gFi-fi-8mV" id="zh3-kC-yhQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBX-LP-9Nh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -188,6 +267,7 @@
     <resources>
         <image name="detail_disclosure.png" width="11" height="20"/>
         <image name="placeholder.jpg" width="320" height="240"/>
+        <image name="share_icon.png" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BZX-wX-0el"/>

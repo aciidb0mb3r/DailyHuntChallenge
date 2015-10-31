@@ -19,4 +19,6 @@
 
 - (NSArray<NewsArticle *> *)bookmarkedArticles;
 
+- (BOOL)isBookmarked:(NewsArticle *)newsArticle;
+
 @end

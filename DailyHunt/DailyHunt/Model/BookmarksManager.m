@@ -33,11 +33,28 @@
 }
 
 - (void)addToBookmark:(NewsArticle *)newsArticle {
-    
+    [self.bookmarks addObject:newsArticle.copy];
 }
 
 - (void)removeFromBookmark:(NewsArticle *)newsArticle {
-    
+    NewsArticle *article = nil;
+    for(NewsArticle *bookmarkArticle in self.bookmarks) {
+        if([bookmarkArticle.newsURL isEqual:newsArticle.newsURL]) {
+            article = bookmarkArticle;
+            break;
+        }
+    }
+    if(article) {
+        [self.bookmarks removeObject:article];
+    }
+}
+
+- (BOOL)isBookmarked:(NewsArticle *)newsArticle {
+    for(NewsArticle *article in self.bookmarks) {
+        if([article.newsURL isEqual:newsArticle.newsURL])
+            return YES;
+    }
+    return NO;
 }
 
 - (NSArray<NewsArticle *> *)bookmarkedArticles {
