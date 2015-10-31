@@ -38,8 +38,13 @@
     
     self.navbarTitleViewButton = [[UIButton alloc] init];
     [self.navbarTitleViewButton setTitle:@"Home" forState:UIControlStateNormal];
+    [self.navbarTitleViewButton setImage:[UIImage imageNamed:@"expand_triangle"] forState:UIControlStateNormal];
     [self.navbarTitleViewButton addTarget:self action:@selector(titleViewClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.navbarTitleViewButton;
+    [self.navbarTitleViewButton sizeToFit];
+    self.navbarTitleViewButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    self.navbarTitleViewButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    self.navbarTitleViewButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
 }
 
 - (void)searchSetup {
@@ -52,6 +57,8 @@
     self.definesPresentationContext = YES;
     [searchBar sizeToFit];
     searchBar.barTintColor = [UIColor colorWithRed:17/255.0 green:34/255.0 blue:51/255.0 alpha:1.0];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setBackgroundColor:[UIColor colorWithRed:23/255.0	green:45/255.0 blue:67/255.0 alpha:1.0]];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 - (void)beginNewsFetch {
