@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ReadNewsViewController.h
 //  DailyHunt
 //
 //  Created by Ankit Aggarwal on 31/10/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface ReadNewsViewController : UIViewController
 
 @end
-
