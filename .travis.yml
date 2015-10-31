@@ -1,0 +1,3 @@
+language: objective-c
+xcodebuild -workspace DailyHunt/DailyHunt.xcworkspace -scheme DailyHunt -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+
