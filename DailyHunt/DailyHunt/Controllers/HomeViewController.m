@@ -25,10 +25,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setupNavBar];
     [self searchSetup];
     [self beginNewsFetch];
     [self setupPullToRefresh];
+}
+
+- (void)setupNavBar {
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:17/255.0 green:34/255.0 blue:51/255.0 alpha:1.0];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)searchSetup {
@@ -36,9 +41,11 @@
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.searchBar.delegate = self;
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    UISearchBar *searchBar = self.searchController.searchBar;
+    self.tableView.tableHeaderView = searchBar;
     self.definesPresentationContext = YES;
-    [self.searchController.searchBar sizeToFit];
+    [searchBar sizeToFit];
+    searchBar.barTintColor = [UIColor colorWithRed:17/255.0 green:34/255.0 blue:51/255.0 alpha:1.0];
 }
 
 - (void)beginNewsFetch {
