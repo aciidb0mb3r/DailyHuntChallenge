@@ -15,6 +15,8 @@
 #import "Utilities.h"
 #import "BookmarksManager.h"
 
+static NSString *kAPIHitsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json&query=api_hits";
+
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 @property (nonatomic, strong) UIButton *bookmarksButton;
@@ -34,6 +36,7 @@
     [self searchSetup];
     [self beginNewsFetch];
     [self setupPullToRefresh];
+    [self beginUpdatingAPIHits];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -212,6 +215,38 @@
         ReadNewsViewController *vc = segue.destinationViewController;
         vc.newsArticle = article;
     }
+}
+
+#pragma mark - API Hits Methods
+#pragma mark - Not Sure why this is needed so random jugad to display it
+
+- (void)beginUpdatingAPIHits {
+    NSTimer *timer = [[NSTimer alloc] initWithFireDate:NSDate.date interval:30 target:self selector:@selector(fetchAPIHits) userInfo:nil repeats:YES];
+    NSRunLoop *runner = [NSRunLoop currentRunLoop];
+    [runner addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)fetchAPIHits {
+    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:kAPIHitsURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+        if(error || statusCode != 200) {
+            return;
+        }
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSUInteger hits = [json[@"api_hits"] integerValue];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateAPIHitsNumberWithHitsCount:hits];
+        });
+    }] resume];
+}
+
+- (void)updateAPIHitsNumberWithHitsCount:(NSUInteger)hits {
+    UILabel *apiHitsLabel = [[UILabel alloc] init];
+    apiHitsLabel.text = [NSString stringWithFormat:@"Hits: %ld", hits];
+    apiHitsLabel.textColor = [UIColor whiteColor];
+    [apiHitsLabel sizeToFit];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:apiHitsLabel];
+    self.navigationItem.leftBarButtonItem = barItem;
 }
 
 @end

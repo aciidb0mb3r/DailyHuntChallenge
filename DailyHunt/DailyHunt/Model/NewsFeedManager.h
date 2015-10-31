@@ -9,7 +9,7 @@
 #import "MTLModel.h"
 #import "NewsArticle.h"
 
-static NSString * const kNewsFeedManagerErrorDomain = @"HSGUserErrorDomain";
+static NSString * const kNewsFeedManagerErrorDomain = @"kNewsFeedManagerErrorDomain";
 typedef void (^NewsFeedManagerCompletionBlock)(NSArray<NewsArticle *> *results, NSError *error);
 
 typedef NS_ENUM(NSUInteger, NewsFeedNetworkError) {

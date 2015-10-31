@@ -9,7 +9,6 @@
 #import "NewsFeedManager.h"
 
 static NSString *kNewsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json&query=list_news";
-static NSString *kAPIHitsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json&query=api_hits";
 
 @interface NewsFeedManager()
 
