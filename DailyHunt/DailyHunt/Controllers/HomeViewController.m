@@ -10,6 +10,7 @@
 #import "NewsTableViewCell.h"
 #import "NewsArticle.h"
 #import "NewsFeedManager.h"
+#import "ReadNewsViewController.h"
 #import <UIImageView+WebCache.h>
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate>
@@ -35,6 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     [self setupNavBar];
 }
 
@@ -189,11 +191,22 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self performSegueWithIdentifier:@"showNews" sender:self];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 48.0;
+}
+
+#pragma mark - Prepare for Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"showNews"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NewsArticle *article = [self.articles objectAtIndex:indexPath.row];
+        ReadNewsViewController *vc = segue.destinationViewController;
+        vc.newsArticle = article;
+    }
 }
 
 @end

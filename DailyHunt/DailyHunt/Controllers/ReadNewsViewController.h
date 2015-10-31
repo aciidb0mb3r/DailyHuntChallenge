@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewsArticle.h"
 
 @interface ReadNewsViewController : UIViewController
+
+@property (nonatomic, weak) NewsArticle *newsArticle;
 
 @end

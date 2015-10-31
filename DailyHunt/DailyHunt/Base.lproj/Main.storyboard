@@ -116,7 +116,7 @@
                     <navigationItem key="navigationItem" id="ecL-ps-y8I"/>
                     <connections>
                         <outlet property="tableView" destination="hIZ-mJ-rvh" id="T9q-yA-qIF"/>
-                        <segue destination="xIT-7i-Qdy" kind="show" id="BZX-wX-0el"/>
+                        <segue destination="xIT-7i-Qdy" kind="show" identifier="showNews" id="BZX-wX-0el"/>
                         <segue destination="CAv-1Z-p9b" kind="show" identifier="openBookmarks" id="lil-5Z-pOO"/>
                     </connections>
                 </viewController>
