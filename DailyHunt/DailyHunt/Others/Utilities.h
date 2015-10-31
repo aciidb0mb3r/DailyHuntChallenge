@@ -6,8 +6,10 @@
 //  Copyright © 2015 Ankit. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Utilities : NSObject
+
++ (UIImage *)bookmarksImageWithBadgeCount:(NSUInteger)badgeCount;
 
 @end

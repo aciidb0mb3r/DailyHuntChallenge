@@ -12,6 +12,8 @@
 #import "NewsFeedManager.h"
 #import "ReadNewsViewController.h"
 #import <UIImageView+WebCache.h>
+#import "Utilities.h"
+#import "BookmarksManager.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
@@ -55,7 +57,8 @@
     self.navbarTitleViewButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     
     self.bookmarksButton = [[UIButton alloc] init];
-    [self.bookmarksButton setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
+    UIImage *bookmarkImage = [Utilities bookmarksImageWithBadgeCount:[BookmarksManager sharedInstance].bookmarkedArticles.count];
+    [self.bookmarksButton setImage:bookmarkImage forState:UIControlStateNormal];
     [self.bookmarksButton addTarget:self action:@selector(openBookmarks:) forControlEvents:UIControlEventTouchUpInside];
     [self.bookmarksButton sizeToFit];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.bookmarksButton];
