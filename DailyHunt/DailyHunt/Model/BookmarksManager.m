@@ -46,7 +46,7 @@ static NSString *kBookmarksPersistenceKey = @"kBookmarksPersistenceKey";
 - (void)removeFromBookmark:(NewsArticle *)newsArticle {
     NewsArticle *article = nil;
     for(NewsArticle *bookmarkArticle in self.bookmarks) {
-        if([bookmarkArticle.newsURL isEqual:newsArticle.newsURL]) {
+        if([bookmarkArticle isEqual:newsArticle]) {
             article = bookmarkArticle;
             break;
         }

@@ -82,4 +82,14 @@
     return outputArray;
 }
 
+- (BOOL)isEqual:(id)object {
+    if(![object isKindOfClass:[NewsArticle class]])
+        return NO;
+    if(self == object)
+        return YES;
+    if ([self.newsURL isEqual:[object newsURL]]) 
+        return YES;
+    return NO;
+}
+
 @end

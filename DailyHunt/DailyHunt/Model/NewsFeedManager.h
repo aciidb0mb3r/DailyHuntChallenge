@@ -24,4 +24,6 @@ typedef NS_ENUM(NSUInteger, NewsFeedNetworkError) {
 
 - (void)fetchNewsCompletion:(NewsFeedManagerCompletionBlock)completion;
 
+- (NewsArticle *)liveNewsRelatedToArticle:(NewsArticle *)relatedArticle;
+
 @end

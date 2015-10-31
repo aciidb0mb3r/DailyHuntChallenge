@@ -13,6 +13,7 @@ static NSString *kNewsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json
 @interface NewsFeedManager()
 
 @property (nonatomic, strong) NSURLSession *urlSession;
+@property (nonatomic, strong) NSArray<NewsArticle *> *results; // Used for live news
 
 @end
 
@@ -32,6 +33,19 @@ static NSString *kNewsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json
         _urlSession = [NSURLSession sessionWithConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     }
     return self;
+}
+
+- (NewsArticle *)liveNewsRelatedToArticle:(NewsArticle *)relatedArticle {
+    if(!(self.results.count > 0))
+        return nil;
+    NewsArticle *livearticle;
+    int maxTries = 5;
+    do {
+        int randNum = rand() % (self.results.count);
+        livearticle = self.results[randNum];
+        maxTries--;
+    } while ([livearticle isEqual:relatedArticle] && maxTries > 0);
+    return livearticle;
 }
 
 - (void)fetchNewsCompletion:(NewsFeedManagerCompletionBlock)completion {
@@ -63,7 +77,7 @@ static NSString *kNewsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json
             completion(nil, [NewsFeedManager errorWithCode:NewsFeedNetworkErrorMantleParsing]);
             return;
         }
-        
+        self.results = results;
         completion(results, nil);
     }] resume];
 }
