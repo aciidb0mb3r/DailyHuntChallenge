@@ -10,4 +10,7 @@
 
 @interface NewsTableViewCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UIImageView *newsImageView;
+@property (nonatomic, weak) IBOutlet UILabel *newsTitle;
+
 @end

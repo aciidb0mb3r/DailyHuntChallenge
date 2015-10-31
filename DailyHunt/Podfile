@@ -2,6 +2,7 @@
 # platform :ios, '6.0'
 
 target 'DailyHunt' do
-	pod 'Mantle', '~> 2.0'
+   pod 'Mantle', '~> 2.0'
+   pod 'SDWebImage', '~> 3.7'
 end
 
