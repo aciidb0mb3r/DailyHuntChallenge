@@ -14,6 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import "Utilities.h"
 #import "BookmarksManager.h"
+#import <MBProgressHUD.h>
 
 static NSString *kAPIHitsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=json&query=api_hits";
 
@@ -94,7 +95,11 @@ static NSString *kAPIHitsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=j
 
 - (void)beginNewsFetch {
     NewsFeedManager *newsFeedManager = [NewsFeedManager sharedInstance];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Loading...";
     [newsFeedManager fetchNewsCompletion:^(NSArray<NewsArticle *> *results, NSError *error) {
+        [hud hide:YES];
         if(error) {
             [self showAlertForError:error];
             return;
