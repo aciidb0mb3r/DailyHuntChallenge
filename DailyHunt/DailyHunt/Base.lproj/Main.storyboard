@@ -89,12 +89,17 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="newsImageView" destination="cdF-4g-uhA" id="ohh-0f-LVj"/>
                                             <outlet property="newsTitle" destination="kGy-UD-bqb" id="Zve-8E-plD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="t2r-yH-xV0"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="G4v-MP-t5i"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>

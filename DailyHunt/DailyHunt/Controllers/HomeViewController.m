@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "NewsTableViewCell.h"
 #import "NewsArticle.h"
+#import "NewsFeedManager.h"
 #import <UIImageView+WebCache.h>
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -22,7 +23,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NewsFeedManager *newsFeedManager = [NewsFeedManager sharedInstance];
+    [newsFeedManager fetchNewsCompletion:^(NSArray<NewsArticle *> *results, NSError *error) {
+        if(error) {
+            [self showAlertForError:error];
+            return;
+        }
+        self.articles = results;
+        [self.tableView reloadData];
+    }];
+}
 
+- (void)showAlertForError:(NSError *)error {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"DailyHunt" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -39,7 +55,7 @@
     NewsArticle *article = self.articles[indexPath.row];
     
     cell.newsTitle.text = article.title;
-    [cell.newsImageView sd_setImageWithURL:article.imageURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.newsImageView sd_setImageWithURL:article.imageURL placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     
     return cell;
 }

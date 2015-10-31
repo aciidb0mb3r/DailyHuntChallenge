@@ -7,7 +7,21 @@
 //
 
 #import "MTLModel.h"
+#import "NewsArticle.h"
+
+static NSString * const kNewsFeedManagerErrorDomain = @"HSGUserErrorDomain";
+typedef void (^NewsFeedManagerCompletionBlock)(NSArray<NewsArticle *> *results, NSError *error);
+
+typedef NS_ENUM(NSUInteger, NewsFeedNetworkError) {
+    NewsFeedNetworkErrorUnknown,
+    NewsFeedNetworkErrorJSONParsing,
+    NewsFeedNetworkErrorMantleParsing
+};
 
 @interface NewsFeedManager : MTLModel
+
++ (instancetype)sharedInstance;
+
+- (void)fetchNewsCompletion:(NewsFeedManagerCompletionBlock)completion;
 
 @end

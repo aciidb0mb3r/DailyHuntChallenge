@@ -14,12 +14,37 @@
     return @{
              @"title"           :   @"title",
              @"source"          :   @"source",
-             @"category"        :   @"category",
              @"categoryString"  :   @"category",
              @"content"         :   @"content",
              @"imageURL"        :   @"image",
              @"newsURL"         :   @"url"
              };
+}
+
+- (NewsArticleCategory)category {
+    NewsArticleCategory category = NewsArticleCategoryUnknown;
+    
+    if([self.categoryString isEqualToString:@"World"]) {
+        category = NewsArticleCategoryWorld;
+        
+    } else if([self.categoryString isEqualToString:@"Education"]) {
+        category = NewsArticleCategoryEducation;
+        
+    } else if([self.categoryString isEqualToString:@"Science"]) {
+        category = NewsArticleCategoryScience;
+        
+    } else if([self.categoryString isEqualToString:@"Technology"]) {
+        category = NewsArticleCategoryTechnology;
+        
+    } else if([self.categoryString isEqualToString:@"Food"]) {
+        category = NewsArticleCategoryFood;
+        
+    } else if([self.categoryString isEqualToString:@"Sports"]) {
+        category = NewsArticleCategorySports;
+        
+    }
+    
+    return category;
 }
 
 + (NSArray<NewsArticle *> *)newsArticleForCategory:(NewsArticleCategory)category inArray:(NSArray<NewsArticle *> *)inputArray {

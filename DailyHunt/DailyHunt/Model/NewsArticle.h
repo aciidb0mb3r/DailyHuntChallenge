@@ -14,7 +14,8 @@ typedef NS_ENUM(NSUInteger, NewsArticleCategory) {
     NewsArticleCategoryScience,
     NewsArticleCategoryTechnology,
     NewsArticleCategoryFood,
-    NewsArticleCategorySports
+    NewsArticleCategorySports,
+    NewsArticleCategoryUnknown
 };
 
 @interface NewsArticle : MTLModel <MTLJSONSerializing>
