@@ -1,5 +1,7 @@
 # DailyHuntChallenge
 
+[![Build Status](https://travis-ci.org/aciidb0mb3r/DailyHuntChallenge.svg?branch=master)](https://travis-ci.org/aciidb0mb3r/DailyHuntChallenge)
+
 * To Run the project, download it and open DailyHunt.xcworkspace in XCode, build and run
 * This Project uses cocoapods (http://cocoapods.org) for third party dependencies
 * Three third party libraries are used : Mantle, SDWebImage and MBProgressHUD
