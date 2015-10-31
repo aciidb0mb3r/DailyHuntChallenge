@@ -8,6 +8,8 @@
 
 #import "BookmarksManager.h"
 
+static NSString *kBookmarksPersistenceKey = @"kBookmarksPersistenceKey";
+
 @interface BookmarksManager ()
 
 @property (nonatomic, strong) NSMutableArray<NewsArticle *> *bookmarks;
@@ -28,12 +30,17 @@
 - (instancetype)init {
     if(self = [super init]) {
         _bookmarks = [@[] mutableCopy];
+        NSData *savedData = [[NSUserDefaults standardUserDefaults] objectForKey:kBookmarksPersistenceKey];
+        if(savedData) {
+            _bookmarks = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+        }
     }
     return self;
 }
 
 - (void)addToBookmark:(NewsArticle *)newsArticle {
     [self.bookmarks addObject:newsArticle.copy];
+    [self save];
 }
 
 - (void)removeFromBookmark:(NewsArticle *)newsArticle {
@@ -47,6 +54,7 @@
     if(article) {
         [self.bookmarks removeObject:article];
     }
+    [self save];
 }
 
 - (BOOL)isBookmarked:(NewsArticle *)newsArticle {
@@ -62,7 +70,9 @@
 }
 
 - (void)save {
-    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.bookmarks];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:kBookmarksPersistenceKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
