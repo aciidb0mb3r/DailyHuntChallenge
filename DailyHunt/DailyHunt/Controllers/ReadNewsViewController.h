@@ -11,6 +11,6 @@
 
 @interface ReadNewsViewController : UIViewController
 
-@property (nonatomic, weak) NewsArticle *newsArticle;
+@property (nonatomic, strong) NewsArticle *newsArticle;
 
 @end
