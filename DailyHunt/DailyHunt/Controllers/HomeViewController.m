@@ -42,7 +42,16 @@ static NSString *kAPIHitsURL = @"http://dailyhunt.0x10.info/api/dailyhunt?type=j
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-    [self setupNavBar];
+    [self updateNavBar];
+}
+
+- (void)updateNavBar {
+    self.navbarTitleViewButton.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    self.navbarTitleViewButton.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    self.navbarTitleViewButton.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    UIImage *bookmarkImage = [Utilities bookmarksImageWithBadgeCount:[BookmarksManager sharedInstance].bookmarkedArticles.count];
+    [self.bookmarksButton setImage:bookmarkImage forState:UIControlStateNormal];
+    [self.bookmarksButton sizeToFit];
 }
 
 - (void)setupNavBar {
